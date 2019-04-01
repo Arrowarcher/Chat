@@ -25,7 +25,7 @@ SECRET_KEY = '%6tuub_uz0ch&)$d#dd+gt_*k55)yi#5o4se_9ui#0+w!@w1^%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -73,7 +73,14 @@ TEMPLATES = [
 WSGI_APPLICATION = 'chat.wsgi.application'
 # Channels
 ASGI_APPLICATION = 'chat.routing.application'
-
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
